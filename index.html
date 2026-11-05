@@ -436,6 +436,19 @@
           </div>
           <button type="submit">Send message</button>
         </form>
+
+        <dialog class="sent-modal" id="sent-modal" aria-labelledby="sent-title">
+          <div class="sent-icon" aria-hidden="true">
+            <svg viewBox="0 0 52 52" width="64" height="64">
+              <circle class="sent-ring" cx="26" cy="26" r="23" />
+              <path class="sent-check" d="M15 27l7 7 15-16" />
+              <path class="sent-cross" d="M18 18l16 16M34 18L18 34" />
+            </svg>
+          </div>
+          <h3 id="sent-title" class="sent-title">Message sent</h3>
+          <p class="sent-text" id="sent-text"></p>
+          <button type="button" class="btn sent-close">Close</button>
+        </dialog>
       </section>
     </main>
 
@@ -455,6 +468,60 @@
     </dialog>
 
     <script>
+      // Contact form: submit to Netlify in the background, then show a themed popup
+      (function () {
+        var form = document.querySelector('form[name="contact"]');
+        var modal = document.getElementById("sent-modal");
+        if (!form || !modal || !window.fetch) return;
+        var btn = form.querySelector('button[type="submit"]');
+        var title = document.getElementById("sent-title");
+        var text = document.getElementById("sent-text");
+
+        function show(ok, name) {
+          modal.classList.toggle("is-error", !ok);
+          title.textContent = ok ? "Message sent" : "Message not sent";
+          text.innerHTML = "";
+          if (ok) {
+            text.append(
+              "Thanks" + (name ? ", " + name : "") + "! Your message is on its way. " +
+              "I'll get back to you as soon as I can."
+            );
+          } else {
+            text.append("Something went wrong on the way. Please try again, or email me directly at ");
+            var a = document.createElement("a");
+            a.href = "mailto:oumayma.abdelkefi@medtech.tn";
+            a.textContent = "oumayma.abdelkefi@medtech.tn";
+            text.append(a, ".");
+          }
+          // restart the draw-in animation each time
+          modal.classList.remove("play"); void modal.offsetWidth; modal.classList.add("play");
+          if (modal.showModal) modal.showModal(); else alert(title.textContent);
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var data = new FormData(form);
+          btn.disabled = true;
+          btn.textContent = "Sending…";
+          fetch("/", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams(data).toString(),
+          })
+            .then(function (res) {
+              if (!res.ok) throw new Error(res.status);
+              var name = (data.get("name") || "").trim().split(/\s+/)[0];
+              form.reset();
+              show(true, name);
+            })
+            .catch(function () { show(false); })
+            .finally(function () { btn.disabled = false; btn.textContent = "Send message"; });
+        });
+
+        modal.querySelector(".sent-close").addEventListener("click", function () { modal.close(); });
+        modal.addEventListener("click", function (e) { if (e.target === modal) modal.close(); });
+      })();
+
       // Typed role, scroll reveals, stat counters, card spotlight
       (function () {
         var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
