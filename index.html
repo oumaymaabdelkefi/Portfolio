@@ -36,6 +36,7 @@
   </head>
 
   <body id="hero">
+    <canvas id="fx" aria-hidden="true"></canvas>
     <a class="skip" href="#projects">Skip to projects</a>
 
     <header class="nav">
@@ -622,6 +623,95 @@
         // click on the dark backdrop (outside the video) closes it
         modal.addEventListener("click", function (e) { if (e.target === modal) close(); });
         modal.addEventListener("close", function () { player.pause(); player.removeAttribute("src"); player.load(); });
+      })();
+
+      // Neon sparkle trail: follows the mouse on desktop, the finger on touch screens
+      (function () {
+        var canvas = document.getElementById("fx");
+        if (!canvas) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          canvas.remove();
+          return;
+        }
+        var ctx = canvas.getContext("2d");
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var touchDevice = !window.matchMedia("(pointer: fine)").matches;
+        var w, h;
+
+        var COLORS = ["#C24BFF", "#E9B8FF", "#7A2BF5", "#FFFFFF"];
+        var MAX = touchDevice ? 90 : 200; // lighter on phones
+
+        function hexToRgba(hex, a) {
+          var n = parseInt(hex.slice(1), 16);
+          return "rgba(" + ((n >> 16) & 255) + "," + ((n >> 8) & 255) + "," + (n & 255) + "," + a + ")";
+        }
+        // pre-render one soft glow sprite per colour
+        var sprites = COLORS.map(function (color) {
+          var s = document.createElement("canvas");
+          s.width = s.height = 64;
+          var c = s.getContext("2d");
+          var g = c.createRadialGradient(32, 32, 0, 32, 32, 32);
+          g.addColorStop(0, hexToRgba(color, 0.95));
+          g.addColorStop(0.4, hexToRgba(color, 0.35));
+          g.addColorStop(1, hexToRgba(color, 0));
+          c.fillStyle = g;
+          c.fillRect(0, 0, 64, 64);
+          return s;
+        });
+
+        function resize() {
+          w = canvas.width = window.innerWidth * dpr;
+          h = canvas.height = window.innerHeight * dpr;
+          canvas.style.width = window.innerWidth + "px";
+          canvas.style.height = window.innerHeight + "px";
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        var particles = [], running = false;
+
+        function add(x, y, n, spread) {
+          for (var i = 0; i < n; i++) {
+            var a = Math.random() * Math.PI * 2, sp = Math.random() * spread;
+            particles.push({
+              x: x, y: y,
+              vx: (Math.cos(a) * sp + (Math.random() - 0.5) * 0.7) * dpr,
+              vy: (Math.sin(a) * sp + (Math.random() - 0.5) * 0.7 + 0.25) * dpr,
+              life: 1,
+              decay: 0.012 + Math.random() * 0.02,
+              size: (5 + Math.random() * 7) * dpr,
+              sprite: sprites[(Math.random() * sprites.length) | 0],
+            });
+          }
+          if (particles.length > MAX) particles.splice(0, particles.length - MAX);
+          if (!running) { running = true; requestAnimationFrame(frame); }
+        }
+
+        // mouse + pen + finger all arrive as pointer events (passive: never blocks scrolling)
+        window.addEventListener("pointermove", function (e) {
+          add(e.clientX * dpr, e.clientY * dpr, e.pointerType === "mouse" ? 2 : 1, 0);
+        }, { passive: true });
+        // a tap on a touch screen gives a small burst
+        window.addEventListener("pointerdown", function (e) {
+          if (e.pointerType !== "mouse") add(e.clientX * dpr, e.clientY * dpr, 12, 1.6);
+        }, { passive: true });
+
+        function frame() {
+          ctx.clearRect(0, 0, w, h);
+          ctx.globalCompositeOperation = "lighter";
+          for (var i = particles.length - 1; i >= 0; i--) {
+            var p = particles[i];
+            p.x += p.vx; p.y += p.vy; p.life -= p.decay;
+            if (p.life <= 0) { particles.splice(i, 1); continue; }
+            var d = p.size * (0.6 + p.life);
+            ctx.globalAlpha = p.life;
+            ctx.drawImage(p.sprite, p.x - d, p.y - d, d * 2, d * 2);
+          }
+          ctx.globalAlpha = 1;
+          ctx.globalCompositeOperation = "source-over";
+          // stop the loop when idle so phones don't burn battery
+          if (particles.length) requestAnimationFrame(frame); else running = false;
+        }
       })();
 
       // Hero background: a slowly drifting neural-network graph

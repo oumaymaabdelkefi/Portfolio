@@ -41,6 +41,8 @@ a:hover { text-decoration: underline; text-underline-offset: 0.18em; }
 
 :focus-visible { outline: 2px solid var(--neon); outline-offset: 3px; border-radius: 3px; }
 
+#fx { position: fixed; inset: 0; pointer-events: none; z-index: 9998; }
+
 .wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--pad); }
 
 .skip {
