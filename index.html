@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ 
+    <!-- EDIT: browser tab title -->
+    <title>Oumayma Abdelkefi — AI &amp; Full Stack Engineer</title>
+ 
+    <!-- EDIT: one-line description for search engines / link previews -->
+    <meta
+      name="description"
+      content="Final-year software engineering student building AI-powered web apps, from machine learning models to the full-stack products around them."
+    />
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+ 
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body id="hero">
+    <canvas id="fx" aria-hidden="true"></canvas>
+    <a class="skip" href="#projects">Skip to projects</a>
+
+    <header class="nav">
+      <a class="brand" href="#hero">OA</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#hero">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-label="Introduction">
+        <canvas id="net" aria-hidden="true"></canvas>
+        <div class="hero-text">
+          <p class="greeting">Hello, I'm</p>
+          <h1 class="neon-sign">Oumayma Abdelkefi</h1>
+          <p class="role">
+            I build <span class="hl">AI-powered</span> web apps, from the
+            machine learning model to the product people use.
+          </p>
+          <p class="hero-tags" aria-label="Focus areas">
+            <span>Machine Learning</span><span>Data</span><span>Full Stack</span>
+          </p>
+          <a class="btn" href="#projects">View my work</a>
+        </div>
+        <div class="hero-photo">
+          <img src="imgs/oumayma.png" alt="Portrait of Oumayma Abdelkefi" width="800" height="935" />
+        </div>
+      </section>
+
+      <section id="about" class="block wrap" aria-labelledby="about-title">
+        <h2 class="section-title" id="about-title">About</h2>
+        <div class="about-text">
+          <p>
+            I'm a final-year software engineering student focused on applied
+            AI. I'm most interested in taking a machine learning model out of
+            the notebook and into a real product, with an API, an interface
+            and a deployment that people can actually use.
+          </p>
+          <p>
+            My full stack background (React, Node.js, Docker, cloud) means I
+            can build the whole pipeline: training on the data, serving the
+            model, and shipping the app around it.
+          </p>
+          <p>
+            When I'm not at my computer I like reading, keeping fit, and playing
+            guitar.
+          </p>
+        </div>
+
+        <div class="skill-groups">
+          <!-- EDIT: add any other AI tools you've actually used, e.g. pandas, NumPy, Jupyter, TensorFlow, PyTorch, Hugging Face, LLM APIs -->
+          <div class="skill-group">
+            <h3 class="skill-label">AI &amp; Data</h3>
+            <div class="skills">
+              <span class="chip chip-ai">Python</span>
+              <span class="chip chip-ai">LLM APIs</span>
+              <span class="chip chip-ai">Embeddings</span>
+              <span class="chip chip-ai">FAISS</span>
+              <span class="chip chip-ai">sentence-transformers</span>
+              <span class="chip chip-ai">spaCy</span>
+              <span class="chip chip-ai">scikit-learn</span>
+              <span class="chip chip-ai">FastAPI</span>
+              <span class="chip chip-ai">Flask</span>
+              <span class="chip chip-ai">Chart.js</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h3 class="skill-label">Web</h3>
+            <div class="skills">
+              <span class="chip">JavaScript</span>
+              <span class="chip">React</span>
+              <span class="chip">Next.js</span>
+              <span class="chip">Node.js</span>
+              <span class="chip">Express</span>
+              <span class="chip">HTML</span>
+              <span class="chip">CSS</span>
+              <span class="chip">Sass</span>
+            </div>
+          </div>
+          <div class="skill-group">
+            <h3 class="skill-label">Data &amp; Cloud</h3>
+            <div class="skills">
+              <span class="chip">PostgreSQL</span>
+              <span class="chip">MongoDB</span>
+              <span class="chip">Docker</span>
+              <span class="chip">Azure</span>
+              <span class="chip">Git</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="projects"
+        class="block wrap"
+        aria-labelledby="projects-title"
+      >
+        <h2 class="section-title" id="projects-title">Projects</h2>
+
+        <div class="projects">
+          <article class="card card-featured">
+            <div class="card-media card-video">
+              <video
+                src="imgs/InternPact_demo_polished.mp4"
+                autoplay muted loop playsinline preload="metadata"
+                aria-label="Demo of InternPact: uploading a CV, then browsing ranked internship matches, skill gaps and a learning path"
+              ></video>
+            </div>
+            <div class="card-body">
+            <p class="featured-label">Featured · LLM + Semantic Search</p>
+            <div class="card-head">
+              <h3>InternPact</h3>
+              <span class="tag">AI Recommender</span>
+            </div>
+            <p>
+              An AI internship recommender. Upload a CV and an LLM turns it
+              into a structured profile, then the app ranks live internship
+              offers against that profile and shows exactly which skills
+              you're missing and how to learn them.
+            </p>
+            <ul class="card-points">
+              <li>LLM CV parsing (Claude, with Gemini and rule-based fallbacks) of PDF, DOCX or text CVs into skills, education and experience</li>
+              <li>Semantic matching with sentence-transformer embeddings and a FAISS index, combined with skill overlap in a hybrid match score</li>
+              <li>Live internship offers pulled from the JSearch API, plus a skill-gap analysis and a personalised learning path</li>
+            </ul>
+            <p class="stack">
+              Python, FastAPI, Claude API, sentence-transformers, FAISS, spaCy, React, Vite
+            </p>
+            <!-- EDIT: no GitHub remote was found for this project. Push it to GitHub, then uncomment:
+            <div class="card-links">
+              <a href="https://github.com/oumaymaabdelkefi/internpact">Source</a>
+            </div>
+            -->
+            </div>
+          </article>
+
+          <article class="card card-featured">
+            <div class="card-media">
+               <img src="imgs/heart-disease-prediction.png" alt="Screenshot of the Heart Disease Prediction app" loading="lazy">
+            </div>
+            <div class="card-body">
+            <p class="featured-label">Featured · Machine Learning</p>
+            <div class="card-head">
+              <h3>Heart Disease Prediction</h3>
+              <span class="tag">ML App</span>
+            </div>
+            <p>
+              An end-to-end machine learning app that predicts heart disease
+              risk from clinical data. A scikit-learn model is trained on
+              patient records and served through a Flask API, and each
+              prediction comes with a confidence score.
+            </p>
+            <ul class="card-points">
+              <li>Risk prediction for an individual patient, with model confidence</li>
+              <li>Interactive analytics dashboard for exploring the dataset</li>
+              <li>Cardiology research library and a nearby-hospital finder</li>
+            </ul>
+            <!-- EDIT: add a real metric if you have one, e.g. "Model accuracy: 87% on held-out test set" -->
+            <p class="card-note">Educational project, not medical advice.</p>
+            <p class="stack">
+              Python, Flask, scikit-learn, JavaScript, Chart.js, Leaflet
+            </p>
+            <div class="card-links">
+              <a
+                href="https://github.com/oumaymaabdelkefi/heart-disease-prediction"
+                >Source</a
+              >
+              <a href="https://heart-disease-prediction-xoih.onrender.com/"
+                >Live demo</a
+              >
+            </div>
+            </div>
+          </article>
+
+            <article class="card">
+            <!-- Mobile app: a scrollable strip of real phone screenshots instead of a single web-style screenshot -->
+            <div class="card-gallery" role="group" aria-label="Eddium app screenshots">
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img src="imgs/eddium-login.png" alt="Eddium login screen with the game's logo and dojo artwork" loading="lazy" />
+                </div>
+              </div>
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img src="imgs/eddium-home.png" alt="Eddium home screen showing XP, streak, daily quest and learning path" loading="lazy" />
+                </div>
+              </div>
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img src="imgs/eddium-battle.png" alt="Eddium battle screen: answering a vocabulary question to defeat a monster" loading="lazy" />
+                </div>
+              </div>
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img src="imgs/eddium-word-library.png" alt="Eddium word library listing mastered vocabulary words" loading="lazy" />
+                </div>
+              </div>
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img src="imgs/eddium-profile.png" alt="Eddium profile screen showing level, XP and stats" loading="lazy" />
+                </div>
+              </div>
+              <div class="phone-frame">
+                <div class="phone-screen">
+                  <img src="imgs/eddium-levelup.png" alt="Eddium level-up screen celebrating a new level" loading="lazy" />
+                </div>
+              </div>
+            </div>
+            <div class="card-head">
+              <h3>Eddium</h3>
+              <!-- EDIT: swap for "iOS App", "Android App", etc. if more specific -->
+              <span class="tag">Mobile Game</span>
+            </div>
+            <p>
+              A gamified vocabulary trainer for IELTS/TOEFL prep. Players
+              battle vocabulary monsters by answering definition questions,
+              earning XP and leveling up, while a word library and daily
+              quests track long-term progress. Not deployed publicly — shown
+              here via screenshots.
+            </p>
+            <!-- EDIT: fill in the real stack -->
+            <p class="stack">EDIT: your stack here</p>
+            <div class="card-links">
+              <!-- EDIT: replace with your actual GitHub repo URL -->
+              <a href="https://github.com/oumaymaabdelkefi/eddium">Source</a>
+            </div>
+          </article>
+
+           <article class="card">
+            <div class="card-media">
+              <!-- EDIT: add a screenshot of the task board. Put the file in imgs/, then uncomment: -->
+               <img src="imgs/devboard.png" alt="Screenshot of DevBoard, a task board with To do, In progress and Done columns" loading="lazy">
+            </div>
+            <div class="card-head">
+              <h3>DevBoard</h3>
+              <span class="tag">Full-Stack App</span>
+            </div>
+            <p>
+              A containerized task board built to demonstrate a complete
+              deployment pipeline end to end: a React frontend, a Node/Express
+              REST API, and a PostgreSQL database, packaged with Docker and
+              deployed to Azure Container Apps with a managed Azure Database
+              for PostgreSQL.
+            </p>
+            <p class="stack">React, Node.js, Express, PostgreSQL, Docker, Azure Container Apps</p>
+            <div class="card-links">
+              <!-- EDIT: replace with your actual GitHub repo URL -->
+              <a href="https://github.com/oumaymaabdelkefi/devboard">Source</a>
+              <!-- EDIT: this was live during development at the URL below.
+                   Azure resources get torn down between demos to save credit —
+                   redeploy before sharing this link, or remove it if it's down. -->
+              <a href="https://devboard.redwave-c9bc83fb.francecentral.azurecontainerapps.io">Live demo</a>
+            </div>
+          </article>
+
+          <!-- EDIT: template for your next AI project (e.g. an LLM / RAG app, a computer-vision model,
+               or your final-year project). Fill it in, add a screenshot to imgs/, then uncomment.
+          <article class="card">
+            <div class="card-media">
+              <img src="imgs/project-4.png" alt="Screenshot of PROJECT NAME" loading="lazy">
+            </div>
+            <div class="card-head">
+              <h3>PROJECT NAME</h3>
+              <span class="tag">AI App</span>
+            </div>
+            <p>What problem it solves, which model or approach you used, and what result you got.</p>
+            <p class="stack">Python, ...</p>
+            <div class="card-links">
+              <a href="https://github.com/oumaymaabdelkefi/PROJECT">Source</a>
+            </div>
+          </article>
+          -->
+        </div>
+      </section>
+
+      <section id="contact" class="block wrap" aria-labelledby="contact-title">
+        <h2 class="section-title" id="contact-title">Contact</h2>
+        <p class="contact-intro">
+          Looking for someone to build AI into a real product, or have an
+          internship or role in mind? Leave your details and I'll get back to
+          you.
+        </p>
+
+        <form
+          name="contact"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+        >
+          <input type="hidden" name="form-name" value="contact" />
+          <p class="hidden">
+            <label>Leave this empty: <input name="bot-field" /></label>
+          </p>
+          <div>
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required />
+          </div>
+          <div>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required />
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit">Send message</button>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <span>Oumayma Abdelkefi © 2025</span>
+      <div class="footer-links">
+        <a href="https://github.com/oumaymaabdelkefi">GitHub</a>
+        <a href="mailto:you@example.com">Email</a>
+      </div>
+    </footer>
+
+    <script>
+      // Hero background: a slowly drifting neural-network graph
+      (function () {
+        var canvas = document.getElementById("net");
+        if (!canvas) return;
+        var hero = canvas.parentElement;
+        var ctx = canvas.getContext("2d");
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var w, h, nodes = [], LINK = 140, pulses = [];
+        var mouse = { x: -9999, y: -9999 };
+
+        function resize() {
+          w = document.documentElement.clientWidth;
+          h = hero.getBoundingClientRect().height;
+          canvas.width = w * dpr; canvas.height = h * dpr;
+          canvas.style.width = w + "px"; canvas.style.height = h + "px";
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          var count = Math.round(Math.min(90, (w * h) / 14000));
+          nodes = [];
+          for (var i = 0; i < count; i++) {
+            nodes.push({
+              x: Math.random() * w, y: Math.random() * h,
+              vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
+              r: 1.2 + Math.random() * 1.6,
+            });
+          }
+        }
+
+        function draw() {
+          ctx.clearRect(0, 0, w, h);
+          for (var i = 0; i < nodes.length; i++) {
+            var a = nodes[i];
+            if (!reduce) {
+              a.x += a.vx; a.y += a.vy;
+              if (a.x < 0 || a.x > w) a.vx *= -1;
+              if (a.y < 0 || a.y > h) a.vy *= -1;
+            }
+            for (var j = i + 1; j < nodes.length; j++) {
+              var b = nodes[j];
+              var dx = a.x - b.x, dy = a.y - b.y, d = Math.sqrt(dx * dx + dy * dy);
+              if (d < LINK) {
+                ctx.strokeStyle = "rgba(194,75,255," + (1 - d / LINK) * 0.28 + ")";
+                ctx.lineWidth = 1;
+                ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+                if (!reduce && Math.random() < 0.0004) pulses.push({ a: a, b: b, t: 0 });
+              }
+            }
+            var md = Math.hypot(a.x - mouse.x, a.y - mouse.y);
+            var lit = md < 160 ? 1 - md / 160 : 0;
+            ctx.fillStyle = lit ? "rgba(233,184,255," + (0.5 + lit * 0.5) + ")" : "rgba(194,75,255,0.55)";
+            ctx.beginPath(); ctx.arc(a.x, a.y, a.r + lit * 2, 0, Math.PI * 2); ctx.fill();
+          }
+          // signals travelling along connections
+          for (var k = pulses.length - 1; k >= 0; k--) {
+            var p = pulses[k];
+            p.t += 0.02;
+            if (p.t >= 1) { pulses.splice(k, 1); continue; }
+            var x = p.a.x + (p.b.x - p.a.x) * p.t, y = p.a.y + (p.b.y - p.a.y) * p.t;
+            ctx.fillStyle = "rgba(255,255,255,0.9)";
+            ctx.shadowColor = "#C24BFF"; ctx.shadowBlur = 10;
+            ctx.beginPath(); ctx.arc(x, y, 1.8, 0, Math.PI * 2); ctx.fill();
+            ctx.shadowBlur = 0;
+          }
+          if (!reduce) requestAnimationFrame(draw);
+        }
+
+        window.addEventListener("pointermove", function (e) {
+          var r = canvas.getBoundingClientRect();
+          mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+        }, { passive: true });
+        window.addEventListener("resize", function () { resize(); if (reduce) draw(); });
+        resize();
+        draw();
+      })();
+
+      (function () {
+        var canvas = document.getElementById("fx");
+        var finePointer = window.matchMedia("(pointer: fine)").matches;
+        var reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)",
+        ).matches;
+        if (!canvas || !finePointer || reduceMotion) {
+          if (canvas) canvas.remove();
+          return;
+        }
+
+        var ctx = canvas.getContext("2d");
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var w, h;
+
+        var COLORS = ["#C24BFF", "#E9B8FF", "#7A2BF5", "#FFFFFF"];
+        var SPAWN = 2;
+        var MAX = 200;
+
+        function hexToRgba(hex, a) {
+          var n = parseInt(hex.slice(1), 16);
+          return (
+            "rgba(" +
+            ((n >> 16) & 255) +
+            "," +
+            ((n >> 8) & 255) +
+            "," +
+            (n & 255) +
+            "," +
+            a +
+            ")"
+          );
+        }
+
+        var sprites = COLORS.map(function (color) {
+          var s = document.createElement("canvas");
+          s.width = s.height = 64;
+          var c = s.getContext("2d");
+          var g = c.createRadialGradient(32, 32, 0, 32, 32, 32);
+          g.addColorStop(0, hexToRgba(color, 0.95));
+          g.addColorStop(0.4, hexToRgba(color, 0.35));
+          g.addColorStop(1, hexToRgba(color, 0));
+          c.fillStyle = g;
+          c.fillRect(0, 0, 64, 64);
+          return s;
+        });
+
+        function resize() {
+          w = canvas.width = window.innerWidth * dpr;
+          h = canvas.height = window.innerHeight * dpr;
+          canvas.style.width = window.innerWidth + "px";
+          canvas.style.height = window.innerHeight + "px";
+        }
+        resize();
+        window.addEventListener("resize", resize);
+
+        var particles = [];
+
+        function add(x, y) {
+          for (var i = 0; i < SPAWN; i++) {
+            particles.push({
+              x: x,
+              y: y,
+              vx: (Math.random() - 0.5) * 0.7 * dpr,
+              vy: ((Math.random() - 0.5) * 0.7 + 0.25) * dpr,
+              life: 1,
+              decay: 0.012 + Math.random() * 0.02,
+              size: (5 + Math.random() * 7) * dpr,
+              sprite: sprites[(Math.random() * sprites.length) | 0],
+            });
+          }
+          if (particles.length > MAX)
+            particles.splice(0, particles.length - MAX);
+        }
+
+        window.addEventListener(
+          "pointermove",
+          function (e) {
+            if (e.pointerType && e.pointerType !== "mouse") return;
+            add(e.clientX * dpr, e.clientY * dpr);
+          },
+          { passive: true },
+        );
+
+        function frame() {
+          ctx.clearRect(0, 0, w, h);
+          ctx.globalCompositeOperation = "lighter";
+          for (var i = particles.length - 1; i >= 0; i--) {
+            var p = particles[i];
+            p.x += p.vx;
+            p.y += p.vy;
+            p.life -= p.decay;
+            if (p.life <= 0) {
+              particles.splice(i, 1);
+              continue;
+            }
+            var d = p.size * (0.6 + p.life);
+            ctx.globalAlpha = p.life;
+            ctx.drawImage(p.sprite, p.x - d, p.y - d, d * 2, d * 2);
+          }
+          ctx.globalAlpha = 1;
+          ctx.globalCompositeOperation = "source-over";
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      })();
+    </script>
+  </body>
+</html>
