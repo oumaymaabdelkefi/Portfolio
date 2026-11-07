@@ -549,3 +549,5 @@ button[type="submit"]:disabled { opacity: 0.7; cursor: progress; transform: none
   .sent-modal[open].play { animation: none; }
   .sent-ring, .sent-check, .sent-cross { stroke-dashoffset: 0; animation: none !important; }
 }
+.htl-desc { margin: 0.6rem 0 0; font-size: 0.88rem; line-height: 1.55; color: var(--text); max-width: 32ch; }
+.htl-desc strong { color: #fbf4ff; font-weight: 600; }
